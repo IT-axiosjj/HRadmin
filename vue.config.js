@@ -36,7 +36,14 @@ module.exports = {
       warnings: false,
       errors: true
     },
-    before: require('./mock/mock-server.js')
+    // 跨域代理
+    proxy: {
+      // path :目标服务器
+      "/api": {
+        target: 'https://heimahr.itheima.net/'
+      }
+    }
+    // before: require('./mock/mock-server.js')  基础模板的模拟数据 会拦截请求
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
@@ -46,6 +53,12 @@ module.exports = {
       alias: {
         '@': resolve('src')
       }
+    },
+    // 配置需要排出的包
+    externals: {
+      'vue': 'Vue',
+      'element-ui': 'ELEMENT',
+      'cos-js-sdk-v5': 'COS'
     }
   },
   chainWebpack(config) {
@@ -87,7 +100,7 @@ module.exports = {
             .plugin('ScriptExtHtmlWebpackPlugin')
             .after('html')
             .use('script-ext-html-webpack-plugin', [{
-            // `runtime` must same as runtimeChunk name. default is `runtime`
+              // `runtime` must same as runtimeChunk name. default is `runtime`
               inline: /runtime\..*\.js$/
             }])
             .end()

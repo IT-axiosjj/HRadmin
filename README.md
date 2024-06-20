@@ -29,7 +29,7 @@ cd vue-admin-template
 
 # install dependency
 npm install
-
+#node版本 16.20.22
 # develop
 npm run dev
 ```

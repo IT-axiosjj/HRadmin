@@ -1,24 +1,34 @@
 import request from '@/utils/request'
 
+// export const login = (data) => {
+//   return request({
+//     url: '/sys/login',
+//     method: 'post',
+//     data
+//   })
+// }
+
+// 登录接口
 export function login(data) {
   return request({
-    url: '/vue-admin-template/user/login',
+    url: '/sys/login',
     method: 'post',
     data
   })
 }
-
-export function getInfo(token) {
+// 获取用户信息接口
+export function getUserInfo() {
   return request({
-    url: '/vue-admin-template/user/info',
-    method: 'get',
-    params: { token }
+    url: '/sys/profile',
+    method: 'get'
   })
 }
 
-export function logout() {
+// 更新密码
+export function updatePassword(data) {
   return request({
-    url: '/vue-admin-template/user/logout',
-    method: 'post'
+    url: '/sys/user/updatePass',
+    method: 'put',
+    data
   })
 }
